@@ -1,0 +1,18 @@
+#! /bin/sh
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+echo "=> Instalando control shutdown ...\n"
+sudo cp shutdown-led.py /usr/local/bin/
+sudo chmod +x /usr/local/bin/shutdown-led.py
+
+echo "=> Iniciando control shutdown...\n"
+sudo cp shutdown-led.sh /etc/init.d/
+sudo chmod +x /etc/init.d/shutdown-led.sh
+
+sudo update-rc.d shutdown-led.sh defaults
+sudo /etc/init.d/shutdown-led.sh start
+
+echo "Instalado control Shutdown."
